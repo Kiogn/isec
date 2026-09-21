@@ -121,12 +121,10 @@ public class FileController {
         log.info("Command: {}", command);
 
         Process process = new ProcessBuilder("/bin/sh", "-c", command).start();
-        StringBuilder output = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 log.info("Process output: {}", line);
-                output.append(line).append(System.lineSeparator());
             }
             int exitCode = process.waitFor();
             log.info("Process finished with exit code: {}", exitCode);
@@ -177,13 +175,12 @@ public class FileController {
             newPath
         );
 
+        log.info("Command: {}", pb.command());
         Process process = pb.start();
-        StringBuilder output = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 log.info("Process output: {}", line);
-                output.append(line).append(System.lineSeparator());
             }
             int exitCode = process.waitFor();
             log.info("Process finished with exit code: {}", exitCode);
