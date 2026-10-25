@@ -165,8 +165,8 @@ public class FileController {
         }
 
         String newPath = filePath.toString() + ".mut.png";
-        String command = "convert " + filePath.toString() + " -resize " + resizeParam + " " + newPath;
-        log.info("Command: {}", command);
+        // String command = "convert " + filePath.toString() + " -resize " + resizeParam + " " + newPath;
+        // log.info("Command: {}", command);
 
         ProcessBuilder pb = new ProcessBuilder(
             "convert",
@@ -175,7 +175,7 @@ public class FileController {
             newPath
         );
 
-        log.info("Command: {}", pb.command());
+        // log.info("Command: {}", pb.command());
         Process process = pb.start();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
@@ -185,7 +185,7 @@ public class FileController {
             int exitCode = process.waitFor();
             log.info("Process finished with exit code: {}", exitCode);
         } catch (InterruptedException e) {
-            log.error("Command: {}, interrupted {}", command, e.getMessage());
+            log.error("Command interrupted {}", e.getMessage());
         }
 
         Resource resource = new FileSystemResource(newPath);

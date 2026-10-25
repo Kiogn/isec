@@ -1,0 +1,1004 @@
+{
+    "version": "1.181.1",
+    "results": [
+        {
+            "check_id": "java.spring.security.injection.tainted-system-command.tainted-system-command",
+            "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+            "start": {
+                "line": 123,
+                "col": 9,
+                "offset": 4784
+            },
+            "end": {
+                "line": 123,
+                "col": 80,
+                "offset": 4855
+            },
+            "extra": {
+                "metavars": {
+                    "$1": {
+                        "start": {
+                            "line": 1,
+                            "col": 1,
+                            "offset": 0
+                        },
+                        "end": {
+                            "line": 1,
+                            "col": 13,
+                            "offset": 12
+                        },
+                        "abstract_content": "RequestParam"
+                    },
+                    "$METHODNAME": {
+                        "start": {
+                            "line": 99,
+                            "col": 37,
+                            "offset": 3801
+                        },
+                        "end": {
+                            "line": 99,
+                            "col": 47,
+                            "offset": 3811
+                        },
+                        "abstract_content": "resizeFile"
+                    },
+                    "$REQ": {
+                        "start": {
+                            "line": 99,
+                            "col": 49,
+                            "offset": 3813
+                        },
+                        "end": {
+                            "line": 99,
+                            "col": 61,
+                            "offset": 3825
+                        },
+                        "abstract_content": "RequestParam"
+                    },
+                    "$TYPE": {
+                        "start": {
+                            "line": 99,
+                            "col": 62,
+                            "offset": 3826
+                        },
+                        "end": {
+                            "line": 99,
+                            "col": 68,
+                            "offset": 3832
+                        },
+                        "abstract_content": "String"
+                    }
+                },
+                "message": "Detected user input entering a method which executes a system command. This could result in a command injection vulnerability, which allows an attacker to inject an arbitrary system command onto the server. The attacker could download malware onto or steal data from the server. Instead, use ProcessBuilder, separating the command into individual arguments, like this: `new ProcessBuilder(\"ls\", \"-al\", targetDirectory)`. Further, make sure you hardcode or allowlist the actual command so that attackers can't run arbitrary commands.",
+                "metadata": {
+                    "cwe": [
+                        "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+                    ],
+                    "owasp": [
+                        "A01:2017 - Injection",
+                        "A03:2021 - Injection",
+                        "A05:2025 - Injection"
+                    ],
+                    "category": "security",
+                    "technology": [
+                        "java",
+                        "spring"
+                    ],
+                    "confidence": "HIGH",
+                    "references": [
+                        "https://www.stackhawk.com/blog/command-injection-java/",
+                        "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html",
+                        "https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-078/ExecUnescaped.java"
+                    ],
+                    "cwe2022-top25": true,
+                    "cwe2021-top25": true,
+                    "subcategory": [
+                        "vuln"
+                    ],
+                    "likelihood": "HIGH",
+                    "impact": "HIGH",
+                    "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+                    "vulnerability_class": [
+                        "Command Injection"
+                    ],
+                    "source": "https://semgrep.dev/r/java.spring.security.injection.tainted-system-command.tainted-system-command",
+                    "shortlink": "https://sg.run/epY0",
+                    "semgrep.dev": {
+                        "rule": {
+                            "origin": "community",
+                            "path": "java.spring.security.injection.tainted-system-command.tainted-system-command",
+                            "r_id": 22076,
+                            "rule_id": "6JUxGN",
+                            "rv_id": 1263087,
+                            "url": "https://semgrep.dev/playground/r/8KT5rnP/java.spring.security.injection.tainted-system-command.tainted-system-command",
+                            "version_id": "8KT5rnP"
+                        }
+                    }
+                },
+                "severity": "ERROR",
+                "fingerprint": "dbb3aa62cf99874ea797d363c77d7d6feb0158981caf8cb71f3c6d715ad5d8cb99e40c364f9920eb2f3e90685d4e8c9ff0fd42c668a6fd0de0cb110c68857724_0",
+                "lines": "        Process process = new ProcessBuilder(\"/bin/sh\", \"-c\", command).start();",
+                "is_ignored": false,
+                "validation_state": "NO_VALIDATOR",
+                "dataflow_trace": {
+                    "taint_source": [
+                        "CliLoc",
+                        [
+                            {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 99,
+                                    "col": 69,
+                                    "offset": 3833
+                                },
+                                "end": {
+                                    "line": 99,
+                                    "col": 77,
+                                    "offset": 3841
+                                }
+                            },
+                            "filename"
+                        ]
+                    ],
+                    "intermediate_vars": [
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 99,
+                                    "col": 69,
+                                    "offset": 3833
+                                },
+                                "end": {
+                                    "line": 99,
+                                    "col": 77,
+                                    "offset": 3841
+                                }
+                            },
+                            "content": "filename"
+                        },
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 100,
+                                    "col": 14,
+                                    "offset": 3912
+                                },
+                                "end": {
+                                    "line": 100,
+                                    "col": 22,
+                                    "offset": 3920
+                                }
+                            },
+                            "content": "filePath"
+                        },
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 120,
+                                    "col": 16,
+                                    "offset": 4642
+                                },
+                                "end": {
+                                    "line": 120,
+                                    "col": 23,
+                                    "offset": 4649
+                                }
+                            },
+                            "content": "command"
+                        },
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 123,
+                                    "col": 27,
+                                    "offset": 4802
+                                },
+                                "end": {
+                                    "line": 123,
+                                    "col": 30,
+                                    "offset": 4805
+                                }
+                            },
+                            "content": "new"
+                        }
+                    ],
+                    "taint_sink": [
+                        "CliLoc",
+                        [
+                            {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 123,
+                                    "col": 9,
+                                    "offset": 4784
+                                },
+                                "end": {
+                                    "line": 123,
+                                    "col": 80,
+                                    "offset": 4855
+                                }
+                            },
+                            "Process process = new ProcessBuilder(\"/bin/sh\", \"-c\", command).start();"
+                        ]
+                    ]
+                },
+                "engine_kind": "OSS"
+            }
+        },
+        {
+            "check_id": "java.spring.command-injection.tainted-system-command.tainted-system-command",
+            "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+            "start": {
+                "line": 123,
+                "col": 63,
+                "offset": 4838
+            },
+            "end": {
+                "line": 123,
+                "col": 70,
+                "offset": 4845
+            },
+            "extra": {
+                "metavars": {
+                    "$1": {
+                        "start": {
+                            "line": 1,
+                            "col": 1,
+                            "offset": 0
+                        },
+                        "end": {
+                            "line": 1,
+                            "col": 11,
+                            "offset": 10
+                        },
+                        "abstract_content": "GetMapping"
+                    },
+                    "$MAPPING": {
+                        "start": {
+                            "line": 98,
+                            "col": 6,
+                            "offset": 3736
+                        },
+                        "end": {
+                            "line": 98,
+                            "col": 16,
+                            "offset": 3746
+                        },
+                        "abstract_content": "GetMapping"
+                    },
+                    "$RET": {
+                        "start": {
+                            "line": 99,
+                            "col": 12,
+                            "offset": 3776
+                        },
+                        "end": {
+                            "line": 99,
+                            "col": 36,
+                            "offset": 3800
+                        },
+                        "abstract_content": "ResponseEntity<Resource>"
+                    },
+                    "$METHOD": {
+                        "start": {
+                            "line": 99,
+                            "col": 37,
+                            "offset": 3801
+                        },
+                        "end": {
+                            "line": 99,
+                            "col": 47,
+                            "offset": 3811
+                        },
+                        "abstract_content": "resizeFile"
+                    },
+                    "$METHODNAME": {
+                        "start": {
+                            "line": 99,
+                            "col": 37,
+                            "offset": 3801
+                        },
+                        "end": {
+                            "line": 99,
+                            "col": 47,
+                            "offset": 3811
+                        },
+                        "abstract_content": "resizeFile"
+                    },
+                    "$TYPE": {
+                        "start": {
+                            "line": 99,
+                            "col": 62,
+                            "offset": 3826
+                        },
+                        "end": {
+                            "line": 99,
+                            "col": 68,
+                            "offset": 3832
+                        },
+                        "abstract_content": "String"
+                    },
+                    "$SOURCE": {
+                        "start": {
+                            "line": 99,
+                            "col": 69,
+                            "offset": 3833
+                        },
+                        "end": {
+                            "line": 99,
+                            "col": 77,
+                            "offset": 3841
+                        },
+                        "abstract_content": "filename"
+                    },
+                    "$SH": {
+                        "start": {
+                            "line": 123,
+                            "col": 46,
+                            "offset": 4821
+                        },
+                        "end": {
+                            "line": 123,
+                            "col": 55,
+                            "offset": 4830
+                        },
+                        "abstract_content": "\"/bin/sh\""
+                    },
+                    "$CMD": {
+                        "start": {
+                            "line": 123,
+                            "col": 63,
+                            "offset": 4838
+                        },
+                        "end": {
+                            "line": 123,
+                            "col": 70,
+                            "offset": 4845
+                        },
+                        "abstract_content": "command",
+                        "propagated_value": {
+                            "svalue_start": {
+                                "line": 120,
+                                "col": 26,
+                                "offset": 4652
+                            },
+                            "svalue_end": {
+                                "line": 120,
+                                "col": 102,
+                                "offset": 4728
+                            },
+                            "svalue_abstract_content": "\"convert \"+filePath.toString()+\" -resize \"+resizeParam+\" \"+newPath"
+                        }
+                    }
+                },
+                "message": "Untrusted input might be injected into a command executed by the application, which can lead to a command injection vulnerability. An attacker can execute arbitrary commands, potentially gaining complete control of the system. To prevent this vulnerability, avoid executing OS commands with user input. If this is unavoidable, validate and sanitize the input, and use safe methods for executing the commands. For more information, see: [Java command injection prevention] (https://semgrep.dev/docs/cheat-sheets/java-command-injection/)",
+                "metadata": {
+                    "likelihood": "MEDIUM",
+                    "impact": "HIGH",
+                    "confidence": "HIGH",
+                    "category": "security",
+                    "subcategory": [
+                        "vuln"
+                    ],
+                    "cwe": [
+                        "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+                    ],
+                    "cwe2020-top25": true,
+                    "cwe2021-top25": true,
+                    "cwe2022-top25": true,
+                    "display-name": "OS Command Injection with Spring",
+                    "functional-categories": [
+                        "os::sink::command",
+                        "web::source::cookie::Spring",
+                        "web::source::header::Spring",
+                        "web::source::http-body::Spring",
+                        "web::source::url-path-params::Spring",
+                        "web::source::url-query-string::Spring"
+                    ],
+                    "owasp": [
+                        "A01:2017 - Injection",
+                        "A03:2021 - Injection",
+                        "A05:2025 - Injection"
+                    ],
+                    "references": [
+                        "https://owasp.org/Top10/2025/A05_2025-Injection/",
+                        "https://owasp.org/Top10/A03_2021-Injection"
+                    ],
+                    "release": "ga",
+                    "technology": [
+                        "Spring",
+                        "java"
+                    ],
+                    "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+                    "vulnerability_class": [
+                        "Command Injection"
+                    ],
+                    "source": "https://semgrep.dev/r/java.spring.command-injection.tainted-system-command.tainted-system-command",
+                    "shortlink": "https://sg.run/Or5En",
+                    "semgrep.dev": {
+                        "rule": {
+                            "origin": "pro_rules",
+                            "path": "java.spring.command-injection.tainted-system-command.tainted-system-command",
+                            "r_id": 125031,
+                            "rule_id": "BYUXGOg",
+                            "rv_id": 1414343,
+                            "url": "https://semgrep.dev/playground/r/QkTEj3d/java.spring.command-injection.tainted-system-command.tainted-system-command",
+                            "version_id": "QkTEj3d"
+                        }
+                    }
+                },
+                "severity": "ERROR",
+                "fingerprint": "ce685c1b8d92f33fa4d4eba7eff5c8e9bdf857d39776dd8e086023fc57c6aeb26d06b4276db6fc6e5d05a81e8aa4bdec28f847bd09d86e047c39e1dd5e6622e2_0",
+                "lines": "        Process process = new ProcessBuilder(\"/bin/sh\", \"-c\", command).start();",
+                "is_ignored": false,
+                "validation_state": "NO_VALIDATOR",
+                "dataflow_trace": {
+                    "taint_source": [
+                        "CliLoc",
+                        [
+                            {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 99,
+                                    "col": 69,
+                                    "offset": 3833
+                                },
+                                "end": {
+                                    "line": 99,
+                                    "col": 77,
+                                    "offset": 3841
+                                }
+                            },
+                            "filename"
+                        ]
+                    ],
+                    "intermediate_vars": [
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 99,
+                                    "col": 69,
+                                    "offset": 3833
+                                },
+                                "end": {
+                                    "line": 99,
+                                    "col": 77,
+                                    "offset": 3841
+                                }
+                            },
+                            "content": "filename"
+                        },
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 100,
+                                    "col": 14,
+                                    "offset": 3912
+                                },
+                                "end": {
+                                    "line": 100,
+                                    "col": 22,
+                                    "offset": 3920
+                                }
+                            },
+                            "content": "filePath"
+                        },
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 120,
+                                    "col": 16,
+                                    "offset": 4642
+                                },
+                                "end": {
+                                    "line": 120,
+                                    "col": 23,
+                                    "offset": 4649
+                                }
+                            },
+                            "content": "command"
+                        }
+                    ],
+                    "taint_sink": [
+                        "CliLoc",
+                        [
+                            {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 123,
+                                    "col": 63,
+                                    "offset": 4838
+                                },
+                                "end": {
+                                    "line": 123,
+                                    "col": 70,
+                                    "offset": 4845
+                                }
+                            },
+                            "command"
+                        ]
+                    ]
+                },
+                "engine_kind": "OSS"
+            }
+        },
+        {
+            "check_id": "java.spring.security.injection.tainted-system-command.tainted-system-command",
+            "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+            "start": {
+                "line": 179,
+                "col": 27,
+                "offset": 7031
+            },
+            "end": {
+                "line": 179,
+                "col": 37,
+                "offset": 7041
+            },
+            "extra": {
+                "metavars": {
+                    "$1": {
+                        "start": {
+                            "line": 1,
+                            "col": 1,
+                            "offset": 0
+                        },
+                        "end": {
+                            "line": 1,
+                            "col": 13,
+                            "offset": 12
+                        },
+                        "abstract_content": "RequestParam"
+                    },
+                    "$METHODNAME": {
+                        "start": {
+                            "line": 143,
+                            "col": 37,
+                            "offset": 5662
+                        },
+                        "end": {
+                            "line": 143,
+                            "col": 50,
+                            "offset": 5675
+                        },
+                        "abstract_content": "resizeFileFix"
+                    },
+                    "$REQ": {
+                        "start": {
+                            "line": 143,
+                            "col": 52,
+                            "offset": 5677
+                        },
+                        "end": {
+                            "line": 143,
+                            "col": 64,
+                            "offset": 5689
+                        },
+                        "abstract_content": "RequestParam"
+                    },
+                    "$TYPE": {
+                        "start": {
+                            "line": 143,
+                            "col": 65,
+                            "offset": 5690
+                        },
+                        "end": {
+                            "line": 143,
+                            "col": 71,
+                            "offset": 5696
+                        },
+                        "abstract_content": "String"
+                    },
+                    "$X": {
+                        "start": {
+                            "line": 167,
+                            "col": 26,
+                            "offset": 6585
+                        },
+                        "end": {
+                            "line": 167,
+                            "col": 45,
+                            "offset": 6604
+                        },
+                        "abstract_content": "filePath.toString()"
+                    },
+                    "$Y": {
+                        "start": {
+                            "line": 167,
+                            "col": 48,
+                            "offset": 6607
+                        },
+                        "end": {
+                            "line": 167,
+                            "col": 58,
+                            "offset": 6617
+                        },
+                        "abstract_content": "\".mut.png\""
+                    },
+                    "$BUILDER": {
+                        "start": {
+                            "line": 179,
+                            "col": 27,
+                            "offset": 7031
+                        },
+                        "end": {
+                            "line": 179,
+                            "col": 29,
+                            "offset": 7033
+                        },
+                        "abstract_content": "pb",
+                        "propagated_value": {
+                            "svalue_start": {
+                                "line": 171,
+                                "col": 29,
+                                "offset": 6803
+                            },
+                            "svalue_end": {
+                                "line": 176,
+                                "col": 10,
+                                "offset": 6949
+                            },
+                            "svalue_abstract_content": "new ProcessBuilder(\"convert\"filePath.toString()\"-resize\"resizeParam newPath)"
+                        }
+                    }
+                },
+                "message": "Detected user input entering a method which executes a system command. This could result in a command injection vulnerability, which allows an attacker to inject an arbitrary system command onto the server. The attacker could download malware onto or steal data from the server. Instead, use ProcessBuilder, separating the command into individual arguments, like this: `new ProcessBuilder(\"ls\", \"-al\", targetDirectory)`. Further, make sure you hardcode or allowlist the actual command so that attackers can't run arbitrary commands.",
+                "metadata": {
+                    "cwe": [
+                        "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+                    ],
+                    "owasp": [
+                        "A01:2017 - Injection",
+                        "A03:2021 - Injection",
+                        "A05:2025 - Injection"
+                    ],
+                    "category": "security",
+                    "technology": [
+                        "java",
+                        "spring"
+                    ],
+                    "confidence": "HIGH",
+                    "references": [
+                        "https://www.stackhawk.com/blog/command-injection-java/",
+                        "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html",
+                        "https://github.com/github/codeql/blob/main/java/ql/src/Security/CWE/CWE-078/ExecUnescaped.java"
+                    ],
+                    "cwe2022-top25": true,
+                    "cwe2021-top25": true,
+                    "subcategory": [
+                        "vuln"
+                    ],
+                    "likelihood": "HIGH",
+                    "impact": "HIGH",
+                    "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+                    "vulnerability_class": [
+                        "Command Injection"
+                    ],
+                    "source": "https://semgrep.dev/r/java.spring.security.injection.tainted-system-command.tainted-system-command",
+                    "shortlink": "https://sg.run/epY0",
+                    "semgrep.dev": {
+                        "rule": {
+                            "origin": "community",
+                            "path": "java.spring.security.injection.tainted-system-command.tainted-system-command",
+                            "r_id": 22076,
+                            "rule_id": "6JUxGN",
+                            "rv_id": 1263087,
+                            "url": "https://semgrep.dev/playground/r/8KT5rnP/java.spring.security.injection.tainted-system-command.tainted-system-command",
+                            "version_id": "8KT5rnP"
+                        }
+                    }
+                },
+                "severity": "ERROR",
+                "fingerprint": "98f69a113693b8b54aaabeb439c4c4bdbecd8d78df7fa8ed180221c68e8690aa6341c6a62e616b4094326036e9ab89a91a1d2a9e0a7558a02741a36f58cbf629_0",
+                "lines": "        Process process = pb.start();",
+                "is_ignored": false,
+                "validation_state": "NO_VALIDATOR",
+                "dataflow_trace": {
+                    "taint_source": [
+                        "CliLoc",
+                        [
+                            {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 143,
+                                    "col": 72,
+                                    "offset": 5697
+                                },
+                                "end": {
+                                    "line": 143,
+                                    "col": 80,
+                                    "offset": 5705
+                                }
+                            },
+                            "filename"
+                        ]
+                    ],
+                    "intermediate_vars": [
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 143,
+                                    "col": 72,
+                                    "offset": 5697
+                                },
+                                "end": {
+                                    "line": 143,
+                                    "col": 80,
+                                    "offset": 5705
+                                }
+                            },
+                            "content": "filename"
+                        },
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 144,
+                                    "col": 14,
+                                    "offset": 5776
+                                },
+                                "end": {
+                                    "line": 144,
+                                    "col": 22,
+                                    "offset": 5784
+                                }
+                            },
+                            "content": "filePath"
+                        },
+                        {
+                            "location": {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 171,
+                                    "col": 24,
+                                    "offset": 6798
+                                },
+                                "end": {
+                                    "line": 171,
+                                    "col": 26,
+                                    "offset": 6800
+                                }
+                            },
+                            "content": "pb"
+                        }
+                    ],
+                    "taint_sink": [
+                        "CliLoc",
+                        [
+                            {
+                                "path": "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+                                "start": {
+                                    "line": 179,
+                                    "col": 27,
+                                    "offset": 7031
+                                },
+                                "end": {
+                                    "line": 179,
+                                    "col": 37,
+                                    "offset": 7041
+                                }
+                            },
+                            "pb.start()"
+                        ]
+                    ]
+                },
+                "engine_kind": "OSS"
+            }
+        },
+        {
+            "check_id": "java.lang.security.sql.drivermanager-hardcoded-secret.drivermanager-hardcoded-secret",
+            "path": "src/main/java/nsu/security/demoapplication/repository/OrderJdbcRepository.java",
+            "start": {
+                "line": 32,
+                "col": 26,
+                "offset": 928
+            },
+            "end": {
+                "line": 32,
+                "col": 74,
+                "offset": 976
+            },
+            "extra": {
+                "metavars": {
+                    "$DB": {
+                        "start": {
+                            "line": 32,
+                            "col": 54,
+                            "offset": 956
+                        },
+                        "end": {
+                            "line": 32,
+                            "col": 57,
+                            "offset": 959
+                        },
+                        "abstract_content": "URL",
+                        "propagated_value": {
+                            "svalue_start": {
+                                "line": 18,
+                                "col": 39,
+                                "offset": 483
+                            },
+                            "svalue_end": {
+                                "line": 18,
+                                "col": 73,
+                                "offset": 517
+                            },
+                            "svalue_abstract_content": "\"jdbc:postgresql://db:5432/demodb\""
+                        }
+                    },
+                    "$USER": {
+                        "start": {
+                            "line": 32,
+                            "col": 59,
+                            "offset": 961
+                        },
+                        "end": {
+                            "line": 32,
+                            "col": 63,
+                            "offset": 965
+                        },
+                        "abstract_content": "USER",
+                        "propagated_value": {
+                            "svalue_start": {
+                                "line": 19,
+                                "col": 40,
+                                "offset": 559
+                            },
+                            "svalue_end": {
+                                "line": 19,
+                                "col": 46,
+                                "offset": 565
+                            },
+                            "svalue_abstract_content": "\"demo\""
+                        }
+                    }
+                },
+                "message": "A secret is hard-coded in the application. Secrets stored in source code, such as credentials, identifiers, and other types of sensitive data, can be leaked and used by internal or external malicious actors. Use environment variables to securely provide credentials and other secrets or retrieve them from a secure vault or Hardware Security Module (HSM).",
+                "metadata": {
+                    "likelihood": "HIGH",
+                    "impact": "MEDIUM",
+                    "confidence": "HIGH",
+                    "interfile": true,
+                    "category": "security",
+                    "subcategory": [
+                        "vuln"
+                    ],
+                    "cwe": [
+                        "CWE-798: Use of Hard-coded Credentials"
+                    ],
+                    "cwe2021-top25": true,
+                    "cwe2022-top25": true,
+                    "owasp": [
+                        "A07:2021 - Identification and Authentication Failures",
+                        "A07:2025 - Authentication Failures"
+                    ],
+                    "references": [
+                        "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+                    ],
+                    "technology": [
+                        "Java",
+                        "SQL",
+                        "Secrets"
+                    ],
+                    "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+                    "vulnerability_class": [
+                        "Hard-coded Secrets"
+                    ],
+                    "source": "https://semgrep.dev/r/java.lang.security.sql.drivermanager-hardcoded-secret.drivermanager-hardcoded-secret",
+                    "shortlink": "https://sg.run/0Bqw",
+                    "semgrep.dev": {
+                        "rule": {
+                            "origin": "pro_rules",
+                            "path": "java.lang.security.sql.drivermanager-hardcoded-secret.drivermanager-hardcoded-secret",
+                            "r_id": 28098,
+                            "rule_id": "j2Unp0",
+                            "rv_id": 1236410,
+                            "url": "https://semgrep.dev/playground/r/NdTzEbe/java.lang.security.sql.drivermanager-hardcoded-secret.drivermanager-hardcoded-secret",
+                            "version_id": "NdTzEbe"
+                        }
+                    }
+                },
+                "severity": "WARNING",
+                "fingerprint": "52e9820f4ac35a0affa1923d3102b4ba88ab6222e0376fe4399038ce0555d249dd6006b6b2d9945c48960bbdab96d6df77ca863da635685516b57e4c344d4901_0",
+                "lines": "            connection = DriverManager.getConnection(URL, USER, PASSWORD);",
+                "is_ignored": false,
+                "validation_state": "NO_VALIDATOR",
+                "engine_kind": "OSS"
+            }
+        }
+    ],
+    "errors": [],
+    "paths": {
+        "scanned": [
+            "src/main/java/nsu/security/demoapplication/DemoapplicationApplication.java",
+            "src/main/java/nsu/security/demoapplication/controller/FileController.java",
+            "src/main/java/nsu/security/demoapplication/controller/HealthController.java",
+            "src/main/java/nsu/security/demoapplication/controller/OrderController.java",
+            "src/main/java/nsu/security/demoapplication/model/Order.java",
+            "src/main/java/nsu/security/demoapplication/repository/OrderJdbcRepository.java",
+            "src/main/java/nsu/security/demoapplication/repository/OrderRepository.java"
+        ]
+    },
+    "time": {
+        "rules": [],
+        "rules_parse_time": 0.6697590351104736,
+        "profiling_times": {
+            "config_time": 2.8476874828338623,
+            "core_time": 4.727267026901245,
+            "ignores_time": 0.000324249267578125,
+            "total_time": 7.585642337799072
+        },
+        "parsing_time": {
+            "total_time": 0.13886713981628418,
+            "per_file_time": {
+                "mean": 0.0008789059482043302,
+                "std_dev": 1.7226392284817735e-05
+            },
+            "very_slow_stats": {
+                "time_ratio": 0.0,
+                "count_ratio": 0.0
+            },
+            "very_slow_files": []
+        },
+        "scanning_time": {
+            "total_time": 0.8174011707305908,
+            "per_file_time": {
+                "mean": 0.11677159581865583,
+                "std_dev": 0.012964160397064935
+            },
+            "very_slow_stats": {
+                "time_ratio": 0.0,
+                "count_ratio": 0.0
+            },
+            "very_slow_files": []
+        },
+        "matching_time": {
+            "total_time": 0.31133174896240234,
+            "per_file_and_rule_time": {
+                "mean": 0.001970454107356977,
+                "std_dev": 1.4378636395393138e-05
+            },
+            "very_slow_stats": {
+                "time_ratio": 0.0,
+                "count_ratio": 0.0
+            },
+            "very_slow_rules_on_files": []
+        },
+        "tainting_time": {
+            "total_time": 0.11064887046813965,
+            "per_def_and_rule_time": {
+                "mean": 0.0002056670454798135,
+                "std_dev": 1.2961313208522474e-07
+            },
+            "very_slow_stats": {
+                "time_ratio": 0.0,
+                "count_ratio": 0.0
+            },
+            "very_slow_rules_on_defs": []
+        },
+        "fixpoint_timeouts": [],
+        "prefiltering": {
+            "project_level_time": 0.0,
+            "file_level_time": 0.0,
+            "rules_with_project_prefilters_ratio": 0.0,
+            "rules_with_file_prefilters_ratio": 0.966804979253112,
+            "rules_selected_ratio": 0.09365737996443391,
+            "rules_matched_ratio": 0.09365737996443391
+        },
+        "targets": [],
+        "total_bytes": 0,
+        "max_memory_bytes": 787628416
+    },
+    "engine_requested": "OSS",
+    "interfile_languages_used": [],
+    "skipped_rules": [],
+    "profiling_results": []
+}
